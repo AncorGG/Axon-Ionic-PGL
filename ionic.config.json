@@ -1,0 +1,7 @@
+{
+  "name": "Axon-Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
