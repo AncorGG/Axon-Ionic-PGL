@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'exercise/routines',
+    loadChildren: () => import('./routines/routines.module').then( m => m.RoutinesPageModule)
+  },
 ];
 
 @NgModule({

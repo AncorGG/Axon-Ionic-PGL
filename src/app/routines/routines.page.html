@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ routineId ? 'Edit Routine' : 'New Routine' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveRoutine()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Routine Name</ion-label>
+      <ion-input [(ngModel)]="routine.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea [(ngModel)]="routine.description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+</ion-content>

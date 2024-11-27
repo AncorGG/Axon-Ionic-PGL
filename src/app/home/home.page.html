@@ -1,20 +1,59 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Routines</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Routines</ion-title>
     </ion-toolbar>
   </ion-header>
+  <!-- List -->
+  <ion-list [inset]="true">
+    <!-- Item -->
+    <ion-item *ngFor="let routine of routines" (click)="toggleOptions(routine.id_routine)">
+      <ion-label>
+        <h1>{{routine.name}}</h1>
+        <p>{{routine.description}}</p>
+      </ion-label>
+      <!-- Buttons -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      <ion-buttons *ngIf="expandedId === routine.id_routine" slot="end">
+        <ion-button
+          (click)="navigateToRoutine(routine.id_routine)"
+          fill="outline"
+          color="primary"
+          shape="round"
+        >
+          Configure
+        </ion-button>
+        <ion-button
+          (click)="deleteRoutine(routine.id_routine)"
+          fill="outline"
+          color="danger"
+          shape="round"
+        >
+          Delete
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item (click)="navigateToRoutine()">
+      <ion-label class="ion-text-center">
+        <ion-icon name="add-circle-outline"  size="large"></ion-icon>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- 
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let exercise of exercises" (click)="navigateToExercise(exercise)">
+      <ion-label>
+        <h2>{{ exercise.name }}</h2>
+        <p>{{ exercise.difficulty }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+   -->
 </ion-content>
