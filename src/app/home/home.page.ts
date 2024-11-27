@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { RoutineService } from '../../services/routine.service';
+import { ExerciseService } from 'src/services/exercise.service';
 
 @Component({
   selector: 'app-home',
@@ -14,24 +15,26 @@ export class HomePage{
 
   constructor(
     private routineService: RoutineService,
+    private exerciseService: ExerciseService,
     private navCtrl: NavController
   ) {}
 
   ionViewWillEnter() {
-    // This method runs every time the page is about to be shown
     this.fetchRoutines();
+    this.fetchExercises();
   }
 
-  /*
+  
   async fetchExercises() {
     try {
-      const response = await fetch('/models/ExerciseList.json');
-      this.exercises = await response.json();
+      const data = await this.exerciseService.getExercises();
+      this.exercises = data || [];
     } catch (error) {
       console.error('Error fetching exercises:', error);
+      this.exercises = [];
     }
   }
-  */
+  
 
   async fetchRoutines() {
     try {
