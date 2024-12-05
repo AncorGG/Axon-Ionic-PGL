@@ -15,26 +15,16 @@
     <!-- Item -->
     <ion-item *ngFor="let routine of routines" (click)="toggleOptions(routine.id_routine)">
       <ion-label>
-        <h1>{{routine.name}}</h1>
+        <h1>{{routine.routine_name}}</h1>
         <p>{{routine.description}}</p>
       </ion-label>
       <!-- Buttons -->
 
       <ion-buttons *ngIf="expandedId === routine.id_routine" slot="end">
-        <ion-button
-          (click)="navigateToRoutine(routine.id_routine)"
-          fill="outline"
-          color="primary"
-          shape="round"
-        >
+        <ion-button (click)="navigateToRoutine(routine.id_routine)" fill="outline" color="primary" shape="round">
           Configure
         </ion-button>
-        <ion-button
-          (click)="deleteRoutine(routine.id_routine)"
-          fill="outline"
-          color="danger"
-          shape="round"
-        >
+        <ion-button (click)="deleteRoutine(routine.id_routine)" fill="outline" color="danger" shape="round">
           Delete
         </ion-button>
       </ion-buttons>
@@ -42,7 +32,7 @@
 
     <ion-item (click)="navigateToRoutine()">
       <ion-label class="ion-text-center">
-        <ion-icon name="add-circle-outline"  size="large"></ion-icon>
+        <ion-icon name="add-circle-outline" size="large"></ion-icon>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -50,8 +40,7 @@
   <ion-list [inset]="true">
     <ion-item *ngFor="let exercise of exercises" (click)="navigateToExercise(exercise)">
       <ion-label>
-        <h2>{{ exercise.name }}</h2>
-        <p>{{ exercise.difficulty }}</p>
+        <h2>{{ exercise.exercise_name }}</h2>
       </ion-label>
     </ion-item>
   </ion-list>

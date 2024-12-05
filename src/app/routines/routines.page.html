@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>{{ routineId ? 'Edit Routine' : 'New Routine' }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateBack()">Back</ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="saveRoutine()">Save</ion-button>
     </ion-buttons>
@@ -11,11 +14,40 @@
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Routine Name</ion-label>
-      <ion-input [(ngModel)]="routine.name"></ion-input>
+      <ion-input [(ngModel)]="routine.routine_name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description</ion-label>
       <ion-textarea [(ngModel)]="routine.description"></ion-textarea>
     </ion-item>
   </ion-list>
+
+  <!-- Exercises From Routine -->
+  <ion-list *ngIf="exercises && exercises.length > 0; else noExercises">
+
+    <!-- Exercise -->
+    <ion-item *ngFor="let exercise of exercises" (click)="toggleOptions(exercise.id_exercise)">
+      <ion-label>{{ exercise.exercise_name }}</ion-label>
+
+      <!-- Delete -->
+      <ion-buttons *ngIf="expandedId === exercise.id_exercise" slot="end">
+        <ion-button (click)="handleRemoveTempExercise(exercise.id_exercise)" fill="outline" color="danger"
+          shape="round">
+          Delete
+        </ion-button>
+      </ion-buttons>
+
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noExercises>
+    <p>No exercises found for this routine.</p>
+  </ng-template>
+
+  <ion-item>
+    <ion-label class="ion-text-center" (click)="handleAddExercise()">
+      <ion-icon name="add-circle-outline" size="large"></ion-icon>
+    </ion-label>
+  </ion-item>
+
 </ion-content>
