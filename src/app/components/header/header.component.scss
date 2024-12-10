@@ -1,0 +1,22 @@
+.header-container {
+  width: 100%;
+  padding: 0%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #7e9336;
+  border-radius: 0 0 25px 25px;
+  filter: drop-shadow(0 4px 4px rgb(0, 0, 0, 0.25));
+
+  cursor: context-menu;
+}
+
+.header-text {
+  font-family: "Montserrat";
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0em;
+  color: #ffffff;
+}

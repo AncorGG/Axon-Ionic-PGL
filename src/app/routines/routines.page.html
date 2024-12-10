@@ -1,53 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ routineId ? 'Edit Routine' : 'New Routine' }}</ion-title>
-    <ion-buttons slot="start">
-      <ion-button (click)="navigateBack()">Back</ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="saveRoutine()">Save</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Routine Name</ion-label>
-      <ion-input [(ngModel)]="routine.routine_name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Description</ion-label>
-      <ion-textarea [(ngModel)]="routine.description"></ion-textarea>
-    </ion-item>
-  </ion-list>
+  <div class="return-container" (click)="navigateBack()">
+    <ion-icon name="arrow-back"></ion-icon>
+    <p class="return-text">Return</p>
+  </div>
 
-  <!-- Exercises From Routine -->
-  <ion-list *ngIf="exercises && exercises.length > 0; else noExercises">
 
-    <!-- Exercise -->
-    <ion-item *ngFor="let exercise of exercises" (click)="toggleOptions(exercise.id_exercise)">
-      <ion-label>{{ exercise.exercise_name }}</ion-label>
+  <div class="routine-container">
+    <div class="routine-info-container">
+      <div class="routine-info-header">
+        <ion-input [(ngModel)]="routine.routine_name" class="routine-info-title"></ion-input>
+        <ion-icon name="save" class="routine-icon save" (click)="saveRoutine()"></ion-icon>
+      </div>
+      <ion-textarea [(ngModel)]="routine.description" class="routine-info-textarea"></ion-textarea>
+    </div>
 
-      <!-- Delete -->
-      <ion-buttons *ngIf="expandedId === exercise.id_exercise" slot="end">
-        <ion-button (click)="handleRemoveTempExercise(exercise.id_exercise)" fill="outline" color="danger"
-          shape="round">
-          Delete
-        </ion-button>
-      </ion-buttons>
 
-    </ion-item>
-  </ion-list>
+    <!-- Exercises From Routine -->
+    <div class="routine-list-container" *ngIf="exercises && exercises.length > 0; else noExercises">
 
-  <ng-template #noExercises>
-    <p>No exercises found for this routine.</p>
-  </ng-template>
+      <!-- Exercise -->
+      <div class="routine-card" *ngFor="let exercise of exercises">
+        <img src="../../assets/images/exercise.png" alt="Exercise icon" class="routine-card-image" />
 
-  <ion-item>
-    <ion-label class="ion-text-center" (click)="handleAddExercise()">
-      <ion-icon name="add-circle-outline" size="large"></ion-icon>
-    </ion-label>
-  </ion-item>
+        <div class="routine-card-info">
+          <div class="routine-card-header">
+            <p class="routine-card-text">
+              {{ exercise.exercise_name }}
+            </p>
+            <ion-icon name="trash" class="routine-icon delete"
+              (click)="handleRemoveTempExercise(exercise.id_exercise)"></ion-icon>
+          </div>
 
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noExercises>
+      <p>No exercises found for this routine.</p>
+    </ng-template>
+
+    <div class="routine-add-card" (click)="handleAddExercise()">
+      <ion-icon name="add" size="large"></ion-icon>
+    </div>
+  </div>
 </ion-content>

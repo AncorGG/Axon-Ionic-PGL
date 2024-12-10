@@ -1,48 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Routines</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Routines</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-header></app-header>
   <!-- List -->
-  <ion-list [inset]="true">
+  <div class="exercise-routine-list">
     <!-- Item -->
-    <ion-item *ngFor="let routine of routines" (click)="toggleOptions(routine.id_routine)">
+    <div class="exercise-routine" *ngFor="let routine of routines" (click)="toggleOptions(routine.id_routine)">
       <ion-label>
-        <h1>{{routine.routine_name}}</h1>
-        <p>{{routine.description}}</p>
+        <p class="exercise-routine-text">
+          {{routine.routine_name}}
+        </p>
       </ion-label>
       <!-- Buttons -->
 
-      <ion-buttons *ngIf="expandedId === routine.id_routine" slot="end">
-        <ion-button (click)="navigateToRoutine(routine.id_routine)" fill="outline" color="primary" shape="round">
-          Configure
-        </ion-button>
-        <ion-button (click)="deleteRoutine(routine.id_routine)" fill="outline" color="danger" shape="round">
-          Delete
-        </ion-button>
+      <ion-buttons class="exercise-routine-icons" slot="end">
+        <ion-icon name="create" class="exercise-routine-icon edit"
+          (click)="navigateToRoutine(routine.id_routine)"></ion-icon>
+        <ion-icon name="trash" class="exercise-routine-icon delete"
+          (click)="deleteRoutine(routine.id_routine)"></ion-icon>
       </ion-buttons>
-    </ion-item>
+    </div>
 
-    <ion-item (click)="navigateToRoutine()">
-      <ion-label class="ion-text-center">
-        <ion-icon name="add-circle-outline" size="large"></ion-icon>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    <div class="exercise-routine-add" (click)="navigateToRoutine()">
+      <ion-icon name="add-circle-outline" size="large"></ion-icon>
+    </div>
+  </div>
 
   <ion-list [inset]="true">
-    <ion-item *ngFor="let exercise of exercises" (click)="navigateToExercise(exercise)">
-      <ion-label>
-        <h2>{{ exercise.exercise_name }}</h2>
-      </ion-label>
-    </ion-item>
+    <div class="card-container" *ngFor="let exercise of exercises">
+      <img src="../../assets/images/exercise.png" alt={alt} class="card-image" />
+      <p class="card-text">{{exercise.exercise_name}}</p>
+    </div>
   </ion-list>
 
 </ion-content>
