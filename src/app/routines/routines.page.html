@@ -10,10 +10,14 @@
   <div class="routine-container">
     <div class="routine-info-container">
       <div class="routine-info-header">
-        <ion-input [(ngModel)]="routine.routine_name" class="routine-info-title"></ion-input>
+        <ion-input [(ngModel)]="routine.routine_name" class="routine-info-title" placeholder="Input Name"></ion-input>
         <ion-icon name="save" class="routine-icon save" (click)="saveRoutine()"></ion-icon>
       </div>
-      <ion-textarea [(ngModel)]="routine.description" class="routine-info-textarea"></ion-textarea>
+      <ion-textarea [(ngModel)]="routine.description" class="routine-info-textarea"
+        placeholder="Input Description"></ion-textarea>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </div>
 
 

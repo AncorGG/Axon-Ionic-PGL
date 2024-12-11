@@ -17,6 +17,7 @@ export class RoutinesPage implements OnInit {
   exercises: any[] = [];
   expandedId: number | null = null;
   isNew: boolean = true;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -83,7 +84,26 @@ export class RoutinesPage implements OnInit {
     }
   }
 
+  validateRoutineData(): boolean {
+    if (!this.routine.routine_name || this.routine.routine_name.trim() === '') {
+      this.errorMessage = 'Routine name is required.';
+      return false;
+    }
+
+    if (!this.routine.description || this.routine.description.trim() === '') {
+      this.errorMessage = 'Routine description is required.';
+      return false;
+    }
+
+    this.errorMessage = '';
+    return true;
+  }
+
   async saveRoutine() {
+    if (!this.validateRoutineData()) {
+      return;
+    }
+
     if (this.isNew) {
       const newRoutine = {
         routine_name: this.routine.routine_name,
